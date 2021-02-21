@@ -1,0 +1,47 @@
+@startuml
+
+left to right direction
+actor "Cliente" as g
+actor "Macellaio" as mc
+actor "Macellaio" as mc1
+
+package "Operazioni Abituali su chat" as CurrentChat{
+        usecase "Ordina la carne" as UC1
+        usecase "Verifica se l'ordine è stato ricevuto" as UC2
+        usecase "Aggiunge il cliente nella chat" as UC8
+        usecase "Attività di promozione carni e\n itinerari mercato" as UC10
+    }
+
+package "Operazioni di configurazione" as ConfigGlobal{
+    package "configurazione Sito Web" as ConfigWeb{
+        usecase "Si iscrive al servizio di\n Tracking degli Ordini" as UC6
+    }
+    package "Chat telegram" as ConfigChat{
+        usecase "Crea la chat" as UC9
+        usecase "Inserisce il bot dentro la chat" as UC7
+        usecase "Configura il bot\nper la sua macelleria" as UC11
+    }
+    
+}
+
+package "Operazioni abituali su\nSito Web/App mobile" as SitoWeb {        
+    usecase "controlla gli ordini\nstampa" as UC4 
+    usecase "conferma la ricezione" as UC5
+}
+
+
+mc1 --> UC4
+mc1 --> UC5
+mc --> UC6: 1
+mc --> UC9: 2
+mc --> UC7: 3
+mc --> UC11: 4
+mc1 --> UC8: 4
+
+mc1 --> UC10: 5
+g --> UC1
+g --> UC2
+
+
+
+@enduml
